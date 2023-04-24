@@ -1,8 +1,8 @@
 # free-ssh-vpn-panel
 a free ssh-vpn panel
 
-## How to install?
+## How to install? :)
 ```
-$ wget https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/ssh-vpn_install.sh && bash ssh-vpn_install.sh
+bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/ssh-vpn_install.sh)
 ```
 
