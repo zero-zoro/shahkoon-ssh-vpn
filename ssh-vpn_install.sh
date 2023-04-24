@@ -26,14 +26,20 @@ if [[ -n "${passwordtmp}" ]]; then
 fi
 fi
 ipv4=$(curl rabin.cf)
-sudo sed -i '/www-data/d' /etc/sudoers
-sudo sed -i '/apache/d' /etc/sudoers
+sudo sed -i '/www-data/d' /etc/sudoers &
+wait
+sudo sed -i '/apache/d' /etc/sudoers & 
+wait
+
 if command -v apt-get >/dev/null; then
 apt update -y
-sudo apt -y install software-properties-common
-sudo add-apt-repository ppa:ondrej/php -y
 apt remove php8* -y
-apt install apache2 php7.4 zip unzip net-tools curl mariadb-server php7.4-mysql php7.4-xml php7.4-curl -y
+sudo apt -y install software-properties-common
+
+sudo add-apt-repository ppa:ondrej/php -y
+
+apt install apache2 zip unzip net-tools curl mariadb-server -y
+apt install php7.4 php7.4-mysql php7.4-xml php7.4-curl -y
 sudo wget -O /var/www/html/update.zip https://github.com/zero-zoro/free-ssh-vpn-panel/releases/download/ssh-vpn-panel/sshvpn-panel.zip
 sudo unzip -o /var/www/html/update.zip -d /var/www/html/ &
 wait
@@ -87,15 +93,8 @@ echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/local/sbin/nethogs' | sudo EDITOR='te
 wait
 echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/iptables' | sudo EDITOR='tee -a' visudo &
 wait
-rm -fr /var/www/html/p/.htaccess
 
-echo '<Directory /var/www/html/p/>
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-</Directory>' >> /etc/apache2/apache2.conf
 sudo service apache2 restart
-sudo htpasswd -b -c /etc/apache2/.htpasswd ${adminusername} ${adminpassword}
 chown www-data:www-data /var/www/html/p/* &
 wait
 systemctl restart mariadb &
@@ -172,15 +171,9 @@ echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/sbin/iptables' | sudo EDITOR='tee -a' v
 wait
 po=$(cat /etc/ssh/sshd_config | grep "^Port")
 port=$(echo "$po" | sed "s/Port //g")
-rm -fr /var/www/html/p/.htaccess
-echo '<Directory /var/www/html/p/>
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-</Directory>' >> /etc/httpd/conf/httpd.conf
+
 systemctl restart httpd
 systemctl enable httpd
-sudo htpasswd -b -c /etc/httpd/.htpasswd ${adminusername} ${adminpassword}
 chown apache:apache /var/www/html/p/* &
 wait
 sudo sed -i "s/apache2/httpd/g" /var/www/html/p/setting.php &
@@ -191,12 +184,12 @@ sudo phpenmod curl
 PHP_INI=$(php -i | grep /.+/php.ini -oE)
 sed -i 's/extension=intl/;extension=intl/' ${PHP_INI}
 fi
-bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/ionCubeLoader/install.sh --ipv4)
-bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/Nethogs-Json/install.sh --ipv4)
 fggh=`cat /etc/hosts | grep -w konusanlar.tk`
 if [ "${fggh}" == "" ]; then
 sudo echo "127.0.0.1  konusanlar.tk" >> /etc/hosts
 fi
+bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/ionCubeLoader/install.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/Nethogs-Json/install.sh --ipv4)
 mysql -e "create database ShaHaN;" &
 wait
 mysql -e "CREATE USER '${adminusername}'@'localhost' IDENTIFIED BY '${adminpassword}';" &
@@ -220,8 +213,8 @@ cp /var/www/html/p/tarikh /var/www/html/p/backup/tarikh
 rm -fr /var/www/html/p/tarikh
 crontab -l | grep -v '/p/expire.php'  | crontab  -
 crontab -l | grep -v '/p/synctraffic.php'  | crontab  -
-(crontab -l ; echo "* * * * * curl -u $adminusername:$adminpassword http://${ipv4}/p/expire.php >/dev/null 2>&1
-* * * * * curl -u $adminusername:$adminpassword http://${ipv4}/p/synctraffic.php >/dev/null 2>&1" ) | crontab - &
+(crontab -l ; echo "* * * * * curl  http://${ipv4}/p/expire.php >/dev/null 2>&1
+* * * * * curl http://${ipv4}/p/synctraffic.php >/dev/null 2>&1" ) | crontab - &
 wait
 clear
 printf "\nSSH-VPN Free Panel \n"
