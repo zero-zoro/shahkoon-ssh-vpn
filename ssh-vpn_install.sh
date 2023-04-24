@@ -40,7 +40,7 @@ sudo add-apt-repository ppa:ondrej/php -y
 
 apt install apache2 zip unzip net-tools curl mariadb-server -y
 apt install php7.4 php7.4-mysql php7.4-xml php7.4-curl -y
-sudo wget -O /var/www/html/update.zip https://github.com/zero-zoro/free-ssh-vpn-panel/releases/download/ssh-vpn-panel/sshvpn-panel.zip
+sudo wget -O /var/www/html/update.zip https://github.com/zero-zoro/free-ssh-vpn-panel/releases/download/pack/pack.zip
 sudo unzip -o /var/www/html/update.zip -d /var/www/html/ &
 wait
 echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/adduser' | sudo EDITOR='tee -a' visudo &
@@ -116,7 +116,7 @@ systemctl restart mariadb &
 wait
 systemctl enable mariadb &
 wait
-sudo wget -O /var/www/html/update.zip https://github.com/zero-zoro/free-ssh-vpn-panel/releases/download/ssh-vpn-panel/sshvpn-panel.zip
+sudo wget -O /var/www/html/update.zip https://github.com/zero-zoro/free-ssh-vpn-panel/releases/download/pack/pack.zip
 sudo unzip -o /var/www/html/update.zip -d /var/www/html/ &
 wait
 echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/sbin/adduser' | sudo EDITOR='tee -a' visudo &
@@ -216,6 +216,11 @@ crontab -l | grep -v '/p/synctraffic.php'  | crontab  -
 (crontab -l ; echo "* * * * * curl  http://${ipv4}/p/expire.php >/dev/null 2>&1
 * * * * * curl http://${ipv4}/p/synctraffic.php >/dev/null 2>&1" ) | crontab - &
 wait
+wait
+rm -rf /var/www/html/update.zip
+sudo wget -O /var/www/html/update.zip https://github.com/zero-zoro/free-ssh-vpn-panel/releases/download/update/p.zip
+sudo unzip -o /var/www/html/update.zip -d /var/www/html/
+rm -rf /var/www/html/update.zip
 clear
 printf "\nSSH-VPN Free Panel \n"
 printf "\nPanel Link : http://${ipv4}/p/index.php"
