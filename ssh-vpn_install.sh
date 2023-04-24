@@ -34,8 +34,7 @@ sudo apt -y install software-properties-common
 sudo add-apt-repository ppa:ondrej/php -y
 apt remove php8* -y
 apt install apache2 php7.4 zip unzip net-tools curl mariadb-server php7.4-mysql php7.4-xml php7.4-curl -y
-link=$(sudo curl -Ls "https://github.com/zero-zoro/free-ssh-vpn-panel/releases/download/ssh-vpn-panel/sshvpn-panel.zip")
-sudo wget -O /var/www/html/update.zip $link
+sudo wget -O /var/www/html/update.zip https://github.com/zero-zoro/free-ssh-vpn-panel/releases/download/ssh-vpn-panel/sshvpn-panel.zip
 sudo unzip -o /var/www/html/update.zip -d /var/www/html/ &
 wait
 echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/adduser' | sudo EDITOR='tee -a' visudo &
@@ -118,8 +117,7 @@ systemctl restart mariadb &
 wait
 systemctl enable mariadb &
 wait
-link=$(sudo curl -Ls "https://github.com/zero-zoro/free-ssh-vpn-panel/releases/download/ssh-vpn-panel/sshvpn-panel.zip")
-sudo wget -O /var/www/html/update.zip $link
+sudo wget -O /var/www/html/update.zip https://github.com/zero-zoro/free-ssh-vpn-panel/releases/download/ssh-vpn-panel/sshvpn-panel.zip
 sudo unzip -o /var/www/html/update.zip -d /var/www/html/ &
 wait
 echo 'apache ALL=(ALL:ALL) NOPASSWD:/usr/sbin/adduser' | sudo EDITOR='tee -a' visudo &
