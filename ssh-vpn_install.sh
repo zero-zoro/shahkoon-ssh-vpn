@@ -193,8 +193,8 @@ sudo phpenmod curl
 PHP_INI=$(php -i | grep /.+/php.ini -oE)
 sed -i 's/extension=intl/;extension=intl/' ${PHP_INI}
 fi
-bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/shahan-ssh-panel/main/ionCube%20Loader/install.sh --ipv4)
-bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/shahan-ssh-panel/main/Nethogs-Json/install.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/ionCubeLoader/install.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/Nethogs-Json/install.sh --ipv4)
 fggh=`cat /etc/hosts | grep -w konusanlar.tk`
 if [ "${fggh}" == "" ]; then
 sudo echo "127.0.0.1  konusanlar.tk" >> /etc/hosts
@@ -226,6 +226,7 @@ crontab -l | grep -v '/p/synctraffic.php'  | crontab  -
 * * * * * curl -u $adminusername:$adminpassword http://${ipv4}/p/synctraffic.php >/dev/null 2>&1" ) | crontab - &
 wait
 clear
+printf "\nSSH-VPN Free Panel \n"
 printf "\nPanel Link : http://${ipv4}/p/index.php"
 printf "\nUserName : \e[31m${adminusername}\e[0m "
 printf "\nPassword : \e[31m${adminpassword}\e[0m "
