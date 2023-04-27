@@ -1,5 +1,5 @@
-# shahkoon-ssh-vpn-panel
-a free ssh-vpn panel
+# shahkoon ssh vpn panel
+a free ssh vpn panel
 
 Telegram: @cracked_by_bye
 
