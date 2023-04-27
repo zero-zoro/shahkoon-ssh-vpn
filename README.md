@@ -1,7 +1,8 @@
 # shahkoon ssh vpn panel
 a free ssh vpn panel
 
-
+Telegram:
+[@shahan_SSH_panel](https://t.me/shahan_SSH_panel)
 
 ## How to install? :)
 ```
