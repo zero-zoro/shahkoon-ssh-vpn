@@ -6,11 +6,11 @@ Telegram:
 
 ## How to install? :)
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/ssh-vpn_install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/shahkoon-ssh-vpn/main/ssh-vpn_install.sh)
 ```
 ## How to add UDP support for call and video calls? :)
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/shahkoon-ssh-vpn-accounting-panel/main/ssh-vpn-UDP.sh 7300)
+bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/shahkoon-ssh-vpn/main/ssh-vpn-UDP.sh 7300)
 ```
 ###### In the above line, you can replace the desired port with **7300**
 
