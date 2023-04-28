@@ -33,10 +33,11 @@ ExecStart=/usr/local/bin/badvpn-udpgw --loglevel none --listen-addr 127.0.0.1:$u
 
 [Install]
 WantedBy=multi-user.target
-service ssh-udp start
 EOF
 systemctl daemon-reload
 wait
 systemctl enable ssh-udp.service
+wait
+service ssh-udp restart
 clear
 echo "your SSH-VPN UDP port: $udpPort"
