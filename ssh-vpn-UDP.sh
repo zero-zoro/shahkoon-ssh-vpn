@@ -38,4 +38,4 @@ wait
 systemctl enable ssh-udp.service
 service ssh-udp start
 clear
-echo "your SSH-VPN UDP port: $udp_port \n"
+echo "your SSH-VPN UDP port: $udp_port "
