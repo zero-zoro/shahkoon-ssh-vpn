@@ -9,6 +9,7 @@ if [[ $udpPort -gt 65535 || $udpPort -lt 1 ]]; then
 fi
 apt update -y
 apt install git cmake -y
+rm -rf /root/badvpn
 git clone https://github.com/ambrop72/badvpn.git /root/badvpn
 mkdir /root/badvpn/badvpn-build
 cd  /root/badvpn/badvpn-build
@@ -17,6 +18,9 @@ wait
 make 
 wait
 cp udpgw/badvpn-udpgw /usr/local/bin/
+systemctl disable ssh-udp.service
+rm -rf /etc/systemd/system/ssh-udp.service
+wait
 cat >> /etc/systemd/system/ssh-udp.service <<EOF
 [Unit]
 Description=SSH-VPN for UDP
@@ -31,7 +35,8 @@ ExecStart=/usr/local/bin/badvpn-udpgw --loglevel none --listen-addr 127.0.0.1:$u
 WantedBy=multi-user.target
 service ssh-udp start
 EOF
+systemctl daemon-reload
 wait
 systemctl enable ssh-udp.service
 clear
-echo "your SSH-VPN UDP port: $udpPort "
+echo "your SSH-VPN UDP port: $udpPort"
