@@ -1,6 +1,6 @@
 #!/bin/bash
 #coded by: zero-zoro
-echo -e "\nenter your desired UDP Port:"
+echo -e "\nEnter your desired UDP port (choose between 1-65535):"
 read udpPort
 
 if [[ $udpPort -gt 65535 || $udpPort -lt 1 ]]; then
@@ -25,7 +25,7 @@ Description=SSH-VPN for UDP
 User=root
 Restart=always
 Type=simple
-ExecStart=/usr/local/bin/badvpn-udpgw --loglevel none --listen-addr 127.0.0.1:$udp_port
+ExecStart=/usr/local/bin/badvpn-udpgw --loglevel none --listen-addr 127.0.0.1:$udpPort
 
 [Install]
 WantedBy=multi-user.target
@@ -34,4 +34,4 @@ EOF
 wait
 systemctl enable ssh-udp.service
 clear
-echo "your SSH-VPN UDP port: $udp_port "
+echo "your SSH-VPN UDP port: $udpPort "
