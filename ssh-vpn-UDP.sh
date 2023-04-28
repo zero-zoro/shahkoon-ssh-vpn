@@ -1,7 +1,7 @@
 #!/bin/bash
 #coded by: zero-zoro
 if [[ $1 -gt 65535 || $1 -lt 1 ]]; then
-  echo "your port value is out of range"
+  echo "error: your port value is out of range"
   exit 1;
 fi
 apt update -y
