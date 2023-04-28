@@ -1,6 +1,9 @@
 #!/bin/bash
 #coded by: zero-zoro
-if [[ $1 -gt 65535 || $1 -lt 1 ]]; then
+echo -e "\nenter your desired UDP Port:"
+read udpPort
+
+if [[ $udpPort -gt 65535 || $udpPort -lt 1 ]]; then
   echo "error: your port value is out of range"
   exit 1;
 fi
