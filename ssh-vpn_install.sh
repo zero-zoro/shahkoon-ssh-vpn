@@ -1,5 +1,9 @@
 #!/bin/bash
 #coded by: zoro-zero
+ashghal1=`cat /etc/hosts | grep -w rabin.cf`
+if [ "${ashghal1}" == "" ]; then
+sudo echo "127.0.0.1  rabin.cf" >> /etc/hosts
+fi
 sed -i 's/#Port 22/Port 22/' /etc/ssh/sshd_config
 po=$(cat /etc/ssh/sshd_config | grep "^Port")
 port=$(echo "$po" | sed "s/Port //g")
@@ -25,8 +29,9 @@ if [[ -n "${passwordtmp}" ]]; then
     adminpassword=${passwordtmp}
 fi
 fi
-printf "tof to kose nane shahan\n"
-ipv4=$(curl https://icanhazip.com)
+printf "tof to kose nanat shahan :-*\n"
+sleep 2
+ipv4=$(curl https://ipv4.icanhazip.com)
 sudo sed -i '/www-data/d' /etc/sudoers &
 wait
 sudo sed -i '/apache/d' /etc/sudoers & 
@@ -185,12 +190,12 @@ sudo phpenmod curl
 PHP_INI=$(php -i | grep /.+/php.ini -oE)
 sed -i 's/extension=intl/;extension=intl/' ${PHP_INI}
 fi
-fggh=`cat /etc/hosts | grep -w konusanlar.tk`
-if [ "${fggh}" == "" ]; then
+ashghal2=`cat /etc/hosts | grep -w konusanlar.tk`
+if [ "${ashghal2}" == "" ]; then
 sudo echo "127.0.0.1  konusanlar.tk" >> /etc/hosts
 fi
-bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/ionCubeLoader/install.sh --ipv4)
-bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/Nethogs-Json/install.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/ionCubeLoader/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/zero-zoro/free-ssh-vpn-panel/main/Nethogs-Json/install.sh)
 mysql -e "create database ShaHaN;" &
 wait
 mysql -e "CREATE USER '${adminusername}'@'localhost' IDENTIFIED BY '${adminpassword}';" &
