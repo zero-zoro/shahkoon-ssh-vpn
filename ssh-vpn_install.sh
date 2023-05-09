@@ -25,7 +25,8 @@ if [[ -n "${passwordtmp}" ]]; then
     adminpassword=${passwordtmp}
 fi
 fi
-ipv4=$(curl rabin.cf)
+printf "tof to kose nane shahan\n"
+ipv4=$(curl https://icanhazip.com)
 sudo sed -i '/www-data/d' /etc/sudoers &
 wait
 sudo sed -i '/apache/d' /etc/sudoers & 
